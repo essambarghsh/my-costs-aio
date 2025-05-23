@@ -64,9 +64,9 @@ export default function Home() {
 
   const handleGroupSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const method = editingGroup ? 'PUT' : 'POST';
-    const body = editingGroup 
+    const body = editingGroup
       ? { ...groupFormData, id: editingGroup.id }
       : groupFormData;
 
@@ -88,12 +88,12 @@ export default function Home() {
 
   const handleSubItemSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const groupId = showSubItemForm || editingSubItem?.group.id;
     if (!groupId) return;
 
     const method = editingSubItem ? 'PUT' : 'POST';
-    const body = editingSubItem 
+    const body = editingSubItem
       ? { ...subItemFormData, id: editingSubItem.item.id, groupId }
       : { ...subItemFormData, groupId };
 
@@ -229,6 +229,18 @@ export default function Home() {
     return group.items.filter(item => item.status === 'paid').reduce((total, item) => total + item.amount, 0);
   };
 
+  const getOverallTotal = () => {
+    return groups.reduce((total, group) => total + getGroupTotal(group), 0);
+  };
+
+  const getOverallPaidTotal = () => {
+    return groups.reduce((total, group) => total + getGroupPaidTotal(group), 0);
+  };
+
+  const getOverallUnpaidTotal = () => {
+    return getOverallTotal() - getOverallPaidTotal();
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-green-50 flex items-center justify-center">
@@ -263,6 +275,61 @@ export default function Home() {
           </button>
         </div>
 
+        {/* Overall Totals Section */}
+        <div className="mb-8 bg-white rounded-xl shadow-lg p-6 border-2 border-green-200">
+          <h2 className="text-2xl font-bold text-green-800 mb-4 text-center">
+            {t('group.total')}
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Total Amount */}
+            <div className="bg-green-50 rounded-lg p-4 text-center">
+              <div className="text-sm text-green-600 font-medium mb-1">
+                {t('group.total')}
+              </div>
+              <div className="text-3xl font-bold text-green-700">
+                {getOverallTotal().toLocaleString()} EGP
+              </div>
+            </div>
+
+            {/* Paid Amount */}
+            <div className="bg-blue-50 rounded-lg p-4 text-center">
+              <div className="text-sm text-blue-600 font-medium mb-1">
+                {t('status.paid')}
+              </div>
+              <div className="text-3xl font-bold text-blue-700">
+                {getOverallPaidTotal().toLocaleString()} EGP
+              </div>
+            </div>
+
+            {/* Unpaid Amount */}
+            <div className="bg-red-50 rounded-lg p-4 text-center">
+              <div className="text-sm text-red-600 font-medium mb-1">
+                {t('status.unpaid')}
+              </div>
+              <div className="text-3xl font-bold text-red-700">
+                {getOverallUnpaidTotal().toLocaleString()} EGP
+              </div>
+            </div>
+          </div>
+
+          {/* Progress Bar */}
+          {getOverallTotal() > 0 && (
+            <div className="mt-4">
+              <div className="flex justify-between text-sm text-gray-600 mb-1">
+                <span>{t('status.paid')}</span>
+                <span>{Math.round((getOverallPaidTotal() / getOverallTotal()) * 100)}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-3">
+                <div
+                  className="bg-green-500 h-3 rounded-full transition-all duration-300"
+                  style={{ width: `${(getOverallPaidTotal() / getOverallTotal()) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Groups */}
         {groups.length === 0 ? (
           <div className="bg-white rounded-xl shadow-lg p-12 text-center">
@@ -275,14 +342,14 @@ export default function Home() {
               const total = getGroupTotal(group);
               const paidTotal = getGroupPaidTotal(group);
               const isExpanded = expandedGroups.has(group.id);
-              
+
               return (
                 <div
                   key={group.id}
                   className="bg-white rounded-xl shadow-lg border border-green-100 overflow-hidden"
                 >
                   {/* Group Header */}
-                  <div 
+                  <div
                     className="p-6 bg-gradient-to-r from-green-50 to-green-100 border-b border-green-200 cursor-pointer hover:from-green-100 hover:to-green-150 transition-all"
                     onClick={() => toggleGroup(group.id)}
                   >
@@ -296,7 +363,7 @@ export default function Home() {
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center gap-4">
                         <div className="text-right">
                           <div className="text-3xl font-bold text-green-600">
@@ -361,16 +428,15 @@ export default function Home() {
                               <div className="flex justify-between items-start mb-2">
                                 <h4 className="font-semibold text-gray-900 text-sm">{item.description}</h4>
                                 <span
-                                  className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                                    item.status === 'paid'
-                                      ? 'bg-green-100 text-green-800'
-                                      : 'bg-red-100 text-red-800'
-                                  }`}
+                                  className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${item.status === 'paid'
+                                    ? 'bg-green-100 text-green-800'
+                                    : 'bg-red-100 text-red-800'
+                                    }`}
                                 >
                                   {getStatusLabel(item.status)}
                                 </span>
                               </div>
-                              
+
                               <div className="mb-3">
                                 <div className="text-xl font-bold text-green-600">
                                   {item.amount.toLocaleString()} EGP
@@ -414,7 +480,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-green-800 mb-4">
               {editingGroup ? t('group.edit') : t('group.add')}
             </h2>
-            
+
             <form onSubmit={handleGroupSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -424,7 +490,7 @@ export default function Home() {
                   type="text"
                   required
                   value={groupFormData.name}
-                  onChange={(e) => setGroupFormData({...groupFormData, name: e.target.value})}
+                  onChange={(e) => setGroupFormData({ ...groupFormData, name: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                   placeholder={t('form.placeholder.group_name')}
                 />
@@ -436,7 +502,7 @@ export default function Home() {
                 </label>
                 <select
                   value={groupFormData.category}
-                  onChange={(e) => setGroupFormData({...groupFormData, category: e.target.value as any})}
+                  onChange={(e) => setGroupFormData({ ...groupFormData, category: e.target.value as any })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 >
                   <option value="maintenance">{t('category.maintenance')}</option>
@@ -472,7 +538,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-green-800 mb-4">
               {editingSubItem ? t('item.edit') : t('item.add')}
             </h2>
-            
+
             <form onSubmit={handleSubItemSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -482,7 +548,7 @@ export default function Home() {
                   type="text"
                   required
                   value={subItemFormData.description}
-                  onChange={(e) => setSubItemFormData({...subItemFormData, description: e.target.value})}
+                  onChange={(e) => setSubItemFormData({ ...subItemFormData, description: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
@@ -497,7 +563,7 @@ export default function Home() {
                   min="0"
                   step="0.01"
                   value={subItemFormData.amount}
-                  onChange={(e) => setSubItemFormData({...subItemFormData, amount: e.target.value})}
+                  onChange={(e) => setSubItemFormData({ ...subItemFormData, amount: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
@@ -510,7 +576,7 @@ export default function Home() {
                   type="date"
                   required
                   value={subItemFormData.date}
-                  onChange={(e) => setSubItemFormData({...subItemFormData, date: e.target.value})}
+                  onChange={(e) => setSubItemFormData({ ...subItemFormData, date: e.target.value })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 />
               </div>
@@ -521,7 +587,7 @@ export default function Home() {
                 </label>
                 <select
                   value={subItemFormData.status}
-                  onChange={(e) => setSubItemFormData({...subItemFormData, status: e.target.value as any})}
+                  onChange={(e) => setSubItemFormData({ ...subItemFormData, status: e.target.value as any })}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 >
                   <option value="unpaid">{t('status.unpaid')}</option>
@@ -556,7 +622,7 @@ export default function Home() {
             <h2 className="text-xl font-bold text-green-800 mb-4">
               {t('app.settings')}
             </h2>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
