@@ -19,3 +19,97 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* RTL Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] table {
+  direction: rtl;
+}
+
+[dir="rtl"] th,
+[dir="rtl"] td {
+  text-align: right;
+}
+
+/* Arabic Font Support */
+html[lang="ar"] {
+  font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+}
+
+/* Better spacing for Arabic text */
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+/* Fix for form inputs in RTL */
+[dir="rtl"] input,
+[dir="rtl"] select,
+[dir="rtl"] textarea {
+  text-align: right;
+}
+
+[dir="rtl"] input[type="number"] {
+  text-align: left; /* Numbers should still be left-aligned */
+}
+
+/* Modal positioning for RTL */
+[dir="rtl"] .fixed {
+  left: auto;
+  right: 0;
+}
+
+/* Button spacing fix for RTL */
+[dir="rtl"] .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+/* Ensure consistent text direction for numbers and currency */
+.currency-text {
+  direction: ltr;
+  display: inline-block;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Smooth transitions for language switching */
+* {
+  transition: margin 0.2s ease, padding 0.2s ease;
+}
+
+/* Fix table borders in RTL */
+[dir="rtl"] .divide-y > :not([hidden]) ~ :not([hidden]) {
+  border-right-width: 0;
+  border-left-width: 0;
+  border-top-width: 1px;
+}
+
+/* Responsive design improvements */
+@media (max-width: 640px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+  
+  .table-responsive th,
+  .table-responsive td {
+    padding: 0.5rem;
+  }
+}
