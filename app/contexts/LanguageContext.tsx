@@ -9,11 +9,15 @@ type TranslationKey =
   | 'expense.add' | 'expense.edit' | 'expense.description' | 'expense.category' 
   | 'expense.amount' | 'expense.date' | 'expense.status' | 'expense.save' 
   | 'expense.cancel' | 'expense.delete' | 'expense.edit_btn'
+  | 'group.add' | 'group.edit' | 'group.name' | 'group.items_count'
+  | 'group.total' | 'group.paid_total' | 'group.no_groups' | 'group.no_items'
+  | 'item.add' | 'item.edit' | 'item.delete'
   | 'category.maintenance' | 'category.home' | 'category.other'
   | 'status.paid' | 'status.unpaid'
   | 'table.description' | 'table.category' | 'table.amount' | 'table.date' 
   | 'table.status' | 'table.actions'
-  | 'message.no_expenses' | 'message.error' | 'message.success';
+  | 'message.no_expenses' | 'message.error' | 'message.success'
+  | 'form.placeholder.group_name';
 
 interface LanguageContextType {
   language: Language;
@@ -42,6 +46,21 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     'expense.delete': 'حذف',
     'expense.edit_btn': 'تعديل',
     
+    // Group
+    'group.add': 'إضافة مجموعة جديدة',
+    'group.edit': 'تعديل المجموعة',
+    'group.name': 'اسم المجموعة',
+    'group.items_count': 'عنصر',
+    'group.total': 'الإجمالي',
+    'group.paid_total': 'المدفوع',
+    'group.no_groups': 'لا توجد مجموعات',
+    'group.no_items': 'لا توجد عناصر في هذه المجموعة',
+    
+    // Item
+    'item.add': 'إضافة عنصر',
+    'item.edit': 'تعديل العنصر',
+    'item.delete': 'حذف العنصر',
+    
     // Categories
     'category.maintenance': 'أعمال صيانة',
     'category.home': 'منزل',
@@ -63,6 +82,9 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     'message.no_expenses': 'لا توجد مصروفات',
     'message.error': 'حدث خطأ',
     'message.success': 'تم الحفظ بنجاح',
+    
+    // Form Placeholders
+    'form.placeholder.group_name': 'مثال: تجديد المطبخ، صيانة السيارة',
   },
   en: {
     // App
@@ -83,6 +105,21 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     'expense.cancel': 'Cancel',
     'expense.delete': 'Delete',
     'expense.edit_btn': 'Edit',
+    
+    // Group
+    'group.add': 'Add New Group',
+    'group.edit': 'Edit Group',
+    'group.name': 'Group Name',
+    'group.items_count': 'items',
+    'group.total': 'Total',
+    'group.paid_total': 'Paid',
+    'group.no_groups': 'No groups found',
+    'group.no_items': 'No items in this group',
+    
+    // Item
+    'item.add': 'Add Item',
+    'item.edit': 'Edit Item',
+    'item.delete': 'Delete Item',
     
     // Categories
     'category.maintenance': 'Maintenance Work',
@@ -105,6 +142,9 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     'message.no_expenses': 'No expenses found',
     'message.error': 'An error occurred',
     'message.success': 'Saved successfully',
+    
+    // Form Placeholders
+    'form.placeholder.group_name': 'e.g., Kitchen Renovation, Car Maintenance',
   }
 };
 

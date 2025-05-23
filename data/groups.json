@@ -1,0 +1,54 @@
+[
+  {
+    "id": "1748041439762",
+    "name": "كهرباء",
+    "category": "maintenance",
+    "items": [
+      {
+        "id": "1748041463782",
+        "description": "علب ومواسير",
+        "amount": 230,
+        "date": "2025-05-23",
+        "status": "paid"
+      }
+    ],
+    "createdDate": "2025-05-23T23:03:59.762Z"
+  },
+  {
+    "id": "1748041640445",
+    "name": "محارة",
+    "category": "maintenance",
+    "items": [
+      {
+        "id": "1748041656084",
+        "description": "اسمنت",
+        "amount": 1100,
+        "date": "2025-05-23",
+        "status": "paid"
+      },
+      {
+        "id": "1748041684899",
+        "description": "رمل",
+        "amount": 260,
+        "date": "2025-05-23",
+        "status": "paid"
+      }
+    ],
+    "createdDate": "2025-05-23T23:07:20.445Z"
+  },
+  {
+    "id": "1748041834018",
+    "name": "شباك",
+    "category": "maintenance",
+    "items": [
+      {
+        "id": "1748041848530",
+        "description": "طوب",
+        "amount": 210,
+        "date": "2025-05-23",
+        "status": "paid"
+      }
+    ],
+    "createdDate": "2025-05-23T23:10:34.018Z"
+  }
+]
