@@ -94,22 +94,3 @@ html[lang="ar"] {
 * {
   transition: margin 0.2s ease, padding 0.2s ease;
 }
-
-/* Fix table borders in RTL */
-[dir="rtl"] .divide-y > :not([hidden]) ~ :not([hidden]) {
-  border-right-width: 0;
-  border-left-width: 0;
-  border-top-width: 1px;
-}
-
-/* Responsive design improvements */
-@media (max-width: 640px) {
-  .table-responsive {
-    font-size: 0.875rem;
-  }
-  
-  .table-responsive th,
-  .table-responsive td {
-    padding: 0.5rem;
-  }
-}
