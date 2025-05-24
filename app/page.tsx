@@ -243,21 +243,21 @@ export default function Home() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-green-50 flex items-center justify-center">
-        <div className="text-green-600 text-xl">Loading...</div>
+      <div className="min-h-screen bg-emerald-50 flex items-center justify-center">
+        <div className="text-emerald-600 text-xl">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-green-50">
+    <div className="min-h-screen bg-gray-100 pb-32">
       {/* Header */}
-      <header className="bg-green-600 text-white p-4 shadow-lg">
+      <header className="bg-emerald-600 text-white p-4 shadow-lg">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-bold">{t('app.title')}</h1>
           <button
             onClick={() => setShowSettings(true)}
-            className="bg-green-700 hover:bg-green-800 px-4 py-2 rounded-lg transition-colors"
+            className="bg-emerald-700 hover:bg-emerald-800 px-4 py-2 rounded-lg transition-colors"
           >
             {t('app.settings')}
           </button>
@@ -269,32 +269,32 @@ export default function Home() {
         <div className="mb-6">
           <button
             onClick={() => setShowGroupForm(true)}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg"
           >
             + {t('group.add')}
           </button>
         </div>
 
         {/* Overall Totals Section */}
-        <div className="mb-8 bg-white rounded-xl shadow-lg p-6 border-2 border-green-200">
-          <h2 className="text-2xl font-bold text-green-800 mb-4 text-center">
+        <div className="mb-8 bg-white rounded-xl p-6 border border-gray-200">
+          <h2 className="text-2xl font-bold text-emerald-800 mb-4 text-center">
             {t('group.total')}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Total Amount */}
-            <div className="bg-green-50 rounded-lg p-4 text-center">
-              <div className="text-sm text-green-600 font-medium mb-1">
+            <div className="bg-emerald-600 rounded-lg px-4 py-7 text-center border border-emerald-100">
+              <div className="text-sm text-white mb-3 font-bold">
                 {t('group.total')}
               </div>
-              <div className="text-3xl font-bold text-green-700">
+              <div className="text-3xl font-bold text-white">
                 {getOverallTotal().toLocaleString()} EGP
               </div>
             </div>
 
             {/* Paid Amount */}
-            <div className="bg-blue-50 rounded-lg p-4 text-center">
-              <div className="text-sm text-blue-600 font-medium mb-1">
+            <div className="bg-blue-50 rounded-lg px-4 py-7 text-center border border-blue-100">
+              <div className="text-sm text-blue-600 font-bold mb-3">
                 {t('status.paid')}
               </div>
               <div className="text-3xl font-bold text-blue-700">
@@ -303,8 +303,8 @@ export default function Home() {
             </div>
 
             {/* Unpaid Amount */}
-            <div className="bg-red-50 rounded-lg p-4 text-center">
-              <div className="text-sm text-red-600 font-medium mb-1">
+            <div className="bg-red-50 rounded-lg px-4 py-7 text-center border border-red-100">
+              <div className="text-sm text-red-600 font-bold mb-3">
                 {t('status.unpaid')}
               </div>
               <div className="text-3xl font-bold text-red-700">
@@ -322,7 +322,7 @@ export default function Home() {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className="bg-green-500 h-3 rounded-full transition-all duration-300"
+                  className="bg-emerald-500 h-3 rounded-full transition-all duration-300"
                   style={{ width: `${(getOverallPaidTotal() / getOverallTotal()) * 100}%` }}
                 ></div>
               </div>
@@ -346,11 +346,11 @@ export default function Home() {
               return (
                 <div
                   key={group.id}
-                  className="bg-white rounded-xl shadow-lg border border-green-100 overflow-hidden"
+                  className="bg-white rounded-xl border border-gray-200 overflow-hidden"
                 >
                   {/* Group Header */}
                   <div
-                    className="p-6 bg-gradient-to-r from-green-50 to-green-100 border-b border-green-200 cursor-pointer hover:from-green-100 hover:to-green-150 transition-all"
+                    className="p-6 cursor-pointer transition-all"
                     onClick={() => toggleGroup(group.id)}
                   >
                     <div className="flex items-center justify-between">
@@ -358,7 +358,7 @@ export default function Home() {
                         <span className="text-3xl">{getCategoryIcon(group.category)}</span>
                         <div>
                           <h2 className="text-2xl font-bold text-gray-900">{group.name}</h2>
-                          <p className="text-sm text-green-600 font-medium">
+                          <p className="text-sm text-emerald-600 font-medium">
                             {getCategoryLabel(group.category)} • {group.items.length} {t('group.items_count')}
                           </p>
                         </div>
@@ -366,7 +366,7 @@ export default function Home() {
 
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <div className="text-3xl font-bold text-green-600">
+                          <div className="text-xl font-bold text-emerald-600">
                             {total.toLocaleString()} EGP
                           </div>
                           <div className="text-sm text-gray-600">
@@ -379,7 +379,7 @@ export default function Home() {
                               e.stopPropagation();
                               handleEditGroup(group);
                             }}
-                            className="text-green-600 hover:text-green-800 font-medium text-sm px-2 py-1 rounded"
+                            className="text-emerald-600 hover:text-emerald-800 font-medium text-sm px-2 py-1 rounded"
                           >
                             {t('expense.edit_btn')}
                           </button>
@@ -407,7 +407,7 @@ export default function Home() {
                       <div className="mb-4">
                         <button
                           onClick={() => setShowSubItemForm(group.id)}
-                          className="bg-green-100 hover:bg-green-200 text-green-700 px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+                          className="bg-emerald-100 hover:bg-emerald-200 text-emerald-700 px-4 py-2 rounded-lg font-medium transition-colors text-sm"
                         >
                           + {t('item.add')}
                         </button>
@@ -429,7 +429,7 @@ export default function Home() {
                                 <h4 className="font-semibold text-gray-900 text-sm">{item.description}</h4>
                                 <span
                                   className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${item.status === 'paid'
-                                    ? 'bg-green-100 text-green-800'
+                                    ? 'bg-emerald-100 text-emerald-800'
                                     : 'bg-red-100 text-red-800'
                                     }`}
                                 >
@@ -438,7 +438,7 @@ export default function Home() {
                               </div>
 
                               <div className="mb-3">
-                                <div className="text-xl font-bold text-green-600">
+                                <div className="text-sm font-bold text-emerald-600">
                                   {item.amount.toLocaleString()} EGP
                                 </div>
                                 <div className="text-xs text-gray-500">
@@ -449,7 +449,7 @@ export default function Home() {
                               <div className="flex gap-2">
                                 <button
                                   onClick={() => handleEditSubItem(group, item)}
-                                  className="flex-1 bg-green-600 hover:bg-green-700 text-white py-1 px-2 rounded text-xs font-medium transition-colors"
+                                  className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-1 px-2 rounded text-xs font-medium transition-colors"
                                 >
                                   {t('expense.edit_btn')}
                                 </button>
@@ -477,7 +477,7 @@ export default function Home() {
       {showGroupForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 w-full">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold text-green-800 mb-4">
+            <h2 className="text-xl font-bold text-emerald-800 mb-4">
               {editingGroup ? t('group.edit') : t('group.add')}
             </h2>
 
@@ -491,7 +491,7 @@ export default function Home() {
                   required
                   value={groupFormData.name}
                   onChange={(e) => setGroupFormData({ ...groupFormData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   placeholder={t('form.placeholder.group_name')}
                 />
               </div>
@@ -503,7 +503,7 @@ export default function Home() {
                 <select
                   value={groupFormData.category}
                   onChange={(e) => setGroupFormData({ ...groupFormData, category: e.target.value as any })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 >
                   <option value="maintenance">{t('category.maintenance')}</option>
                   <option value="home">{t('category.home')}</option>
@@ -514,7 +514,7 @@ export default function Home() {
               <div className="flex gap-3 pt-4">
                 <button
                   type="submit"
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
                 >
                   {t('expense.save')}
                 </button>
@@ -535,7 +535,7 @@ export default function Home() {
       {showSubItemForm && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 w-full">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold text-green-800 mb-4">
+            <h2 className="text-xl font-bold text-emerald-800 mb-4">
               {editingSubItem ? t('item.edit') : t('item.add')}
             </h2>
 
@@ -549,7 +549,7 @@ export default function Home() {
                   required
                   value={subItemFormData.description}
                   onChange={(e) => setSubItemFormData({ ...subItemFormData, description: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
 
@@ -564,7 +564,7 @@ export default function Home() {
                   step="0.01"
                   value={subItemFormData.amount}
                   onChange={(e) => setSubItemFormData({ ...subItemFormData, amount: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
 
@@ -577,7 +577,7 @@ export default function Home() {
                   required
                   value={subItemFormData.date}
                   onChange={(e) => setSubItemFormData({ ...subItemFormData, date: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
 
@@ -588,7 +588,7 @@ export default function Home() {
                 <select
                   value={subItemFormData.status}
                   onChange={(e) => setSubItemFormData({ ...subItemFormData, status: e.target.value as any })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 >
                   <option value="unpaid">{t('status.unpaid')}</option>
                   <option value="paid">{t('status.paid')}</option>
@@ -598,7 +598,7 @@ export default function Home() {
               <div className="flex gap-3 pt-4">
                 <button
                   type="submit"
-                  className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                  className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
                 >
                   {t('expense.save')}
                 </button>
@@ -619,7 +619,7 @@ export default function Home() {
       {showSettings && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 w-full">
           <div className="bg-white rounded-lg p-6 w-full max-w-sm">
-            <h2 className="text-xl font-bold text-green-800 mb-4">
+            <h2 className="text-xl font-bold text-emerald-800 mb-4">
               {t('app.settings')}
             </h2>
 
@@ -631,7 +631,7 @@ export default function Home() {
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value as 'ar' | 'en')}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 >
                   <option value="ar">العربية</option>
                   <option value="en">English</option>
@@ -642,7 +642,7 @@ export default function Home() {
             <div className="pt-4">
               <button
                 onClick={() => setShowSettings(false)}
-                className="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
               >
                 {t('app.close')}
               </button>
